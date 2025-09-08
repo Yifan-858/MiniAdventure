@@ -8,20 +8,14 @@ namespace MiniAdventure.Characters
 {
     public class Player
     {
-        public string Name{ get; set; }
-        public string HeroType{ get; set; }
-        public int HP { get; set; }
-        public int Damage { get; set; }
+        public string Name;
+        public string HeroType;
+        public int HP ;
+        public int Damage ;
         public int Gold = 0;
 
         public Player(string name, string heroType)
         {
-            //Throw an error if user enter an empty name.
-            if(string.IsNullOrEmpty(name))
-            {
-                throw new ArgumentException("Name can not be empty");
-            }
-
             Name = name;
             HeroType = heroType;
 
