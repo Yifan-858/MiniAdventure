@@ -26,7 +26,7 @@ namespace MiniAdventure
                 enemyArr.Add(enemy);
             }
 
-            //Start Menu
+            //Start Game
             while (true)
             {   
                 Console.WriteLine("HungerGame");
@@ -80,14 +80,51 @@ namespace MiniAdventure
                         continue;
                     }
 
+                    bool isGaming = true;
+                    
+                    while (isGaming) 
+                    { 
+                        //Create the world menu
+                        string[] worldNarrative = { "Welcome to this strange world. You are on a bizzard street when you open your eyes. Oddly, you are very hungry. You decide to...","You ate up the food, but don't feel anything in you belly. You decide to..." };
+                        string[] worldOptions = { "Explore", "Rest", "Check Status", "Quit Game" };
+                        Menu worldMenu = new Menu(worldNarrative[0], worldOptions);
+                        int indexSelected = worldMenu.Run();
 
-                    //Create the world menu
-                    string[] worldNarrative = { "Welcome to this strange world. You are on a bizzard street when you open your eyes. Oddly, you are very hungry. You decide to...","You ate up the food, but don't feel anything in you belly. You decide to..." };
-                    string[] worldOptions = { "Explore", "Rest", "Check Status", "Quit Game" };
-                    Menu worldMenu = new Menu(worldNarrative[0], worldOptions);
-                    int indexSelected = worldMenu.Run();
+                        switch (worldOptions[indexSelected])
+                        {
+                            case "Quit Game":
+                                Console.WriteLine("See you soon.");
+                                isGaming = false;
+                                return;
 
-                    Console.WriteLine(indexSelected);
+                            case "Check Status":
+                                Console.WriteLine($"Name: {player.Name}");
+                                Console.WriteLine($"Hero Type: {player.HeroType}");
+                                Console.WriteLine($"HP: {player.HP}");
+                                Console.WriteLine($"Damage: {player.Damage}");
+                                Console.WriteLine($"Gold: {player.Gold}");
+                                Console.WriteLine($"Press any key to return");
+                                Console.ReadKey(true);
+                                break;
+
+                            case "Rest":
+                                player.HP += 2;
+                                Console.WriteLine($"You took a nap. Gain 2 HP.");
+                                Console.WriteLine($"HP: {player.HP}");
+                                Console.WriteLine($"Press any key to return");
+                                Console.ReadKey(true);
+                                break;
+
+                            case "Explore":
+                                Console.WriteLine(indexSelected);
+                                Console.ReadKey(true);
+                                break;
+
+                            default:
+                                Console.WriteLine("Choose a valid option");
+                                break;
+                        }
+                    }
 
 
 

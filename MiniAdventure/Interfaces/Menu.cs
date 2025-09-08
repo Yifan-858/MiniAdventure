@@ -70,7 +70,6 @@ namespace MiniAdventure.Interfaces
                         IndexSelected = 0;
                     }
                 }
-
             } while (keyPressed != ConsoleKey.Enter);
 
             //return the selected index only when the user presss Enter key
