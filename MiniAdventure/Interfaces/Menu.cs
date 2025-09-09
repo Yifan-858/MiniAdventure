@@ -38,7 +38,7 @@ namespace MiniAdventure.Interfaces
             }
         }
 
-        public int Run()
+        public int ControlChoice()
         {
             ConsoleKey keyPressed ;
 
@@ -46,7 +46,6 @@ namespace MiniAdventure.Interfaces
             {
                 Console.Clear();
                 Console.WriteLine(Narrative);
-                Console.WriteLine();
                 DisplayOptions();
 
                 keyPressed = Console.ReadKey(true).Key;
@@ -72,7 +71,6 @@ namespace MiniAdventure.Interfaces
                 }
             } while (keyPressed != ConsoleKey.Enter);
 
-            //return the selected index only when the user presss Enter key
             return IndexSelected;
 
         }

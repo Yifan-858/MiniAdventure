@@ -1,6 +1,8 @@
-﻿using System;
+﻿using MiniAdventure.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -36,6 +38,38 @@ namespace MiniAdventure.Characters
                     Damage = 8;
                     break;
             }
+        }
+
+        public static Player CreatePlayer(string[] heroTypeOption)
+        {
+            Console.Clear();
+            string name = "";
+            //Get Name from user
+            while (string.IsNullOrEmpty(name))
+            {
+                Console.WriteLine("Create your character"); 
+                Console.WriteLine("Enter your name here:");
+                name = Console.ReadLine()!;
+
+                if (string.IsNullOrEmpty(name))
+                {
+                    Console.WriteLine("Please enter a name");
+
+                }
+            }
+            //Get HeroType
+            string createPlayerNarrtive = "Choose your hero type:";
+            Menu heroTypeMenu = new Menu(createPlayerNarrtive, heroTypeOption);
+            int indexSelected = heroTypeMenu.ControlChoice();
+
+            //Create the player
+            Player player = new Player(name, heroTypeOption[indexSelected]);   
+            
+            Console.WriteLine($"Cool, your name is {player.Name} and you are a {player.HeroType}");
+            Console.WriteLine("Press any key to continue...");
+            Console.ReadKey();
+
+            return player;
         }
     }
 }
