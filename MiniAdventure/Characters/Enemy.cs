@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace MiniAdventure.Characters
 {
     public class Enemy
@@ -12,13 +7,18 @@ namespace MiniAdventure.Characters
         public int HP;
         public int Damage;
         public int GoldReward;
+        public string Narrative;
+        public string Img;
+        
 
-        public Enemy(string name, int hp, int damage, int goldReward)
+        public Enemy(string name, int hp, int damage, int goldReward, string narrative, string img)
         {
             Name = name;
             HP = hp;
             Damage = damage;
             GoldReward = goldReward;
+            Narrative = narrative;
+            Img = img;
         }
     }
 }

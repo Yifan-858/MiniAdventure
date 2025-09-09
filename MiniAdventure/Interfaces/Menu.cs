@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
+using MiniAdventure.Characters;
+using System;
 
 namespace MiniAdventure.Interfaces
 {
@@ -38,13 +36,20 @@ namespace MiniAdventure.Interfaces
             }
         }
 
-        public int ControlChoice()
+        public int ControlChoice(Enemy? enemy=null)
         {
             ConsoleKey keyPressed ;
 
             do
-            {
+            { 
                 Console.Clear();
+
+                if (enemy != null)
+                {
+                    Console.WriteLine(enemy.Narrative);
+                    Console.WriteLine(enemy.Img);
+                }
+                
                 Console.WriteLine(Narrative);
                 DisplayOptions();
 
