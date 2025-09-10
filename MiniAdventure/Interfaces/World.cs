@@ -11,7 +11,7 @@ namespace MiniAdventure.Interfaces
             return false;
         }
 
-        public static void CheckStatus(Player player)
+        public static void CheckStatus(Player player, int winCount)
         {
             Console.Clear();
             Console.WriteLine("+================================+");
@@ -22,6 +22,7 @@ namespace MiniAdventure.Interfaces
             Console.WriteLine($"| HP        : {player.HP}|{player.MaxHP,-16}|");
             Console.WriteLine($"| Damage    : {player.Damage,-19}|");
             Console.WriteLine($"| Gold      : {player.Gold,-19}|");
+            Console.WriteLine($"| Kills     : {winCount,-19}|");
             Console.WriteLine("+================================+");
 
             Console.WriteLine($"Press any key to return.");
@@ -50,7 +51,7 @@ namespace MiniAdventure.Interfaces
             return player.HP;
         }
 
-        public static void Explore(Player player, Enemy enemy)
+        public static void Explore(Player player, Enemy enemy, ref int winCount)
         {
             if (enemy == null)
             {
@@ -68,13 +69,13 @@ namespace MiniAdventure.Interfaces
             int indexSelected = encounterMenu.ControlChoice(enemy);
             
 
-            switch (encounterOptions[indexSelected])
+            switch (indexSelected)
             {
-                case "Take the food!":
-                    Battle.EnterBattle(player, enemy);
+                case 0:
+                    Battle.EnterBattle(player, enemy, ref winCount);
                     break;
 
-                case "Walk away...":
+                case 1:
                     Console.WriteLine("4");
                     break;
 

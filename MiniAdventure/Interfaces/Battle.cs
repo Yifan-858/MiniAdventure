@@ -6,7 +6,7 @@ namespace MiniAdventure.Interfaces
 {
     public static class Battle
     {
-        public static void EnterBattle(Player player, Enemy enemy)
+        public static void EnterBattle(Player player, Enemy enemy, ref int winCount)
         {
             Console.Clear();
             Console.WriteLine(enemy.Narrative);
@@ -26,11 +26,11 @@ namespace MiniAdventure.Interfaces
                 switch (indexSelected)
                 {
                     case 0:
-                        isInBattle= Fight(player, enemy);
+                        isInBattle= Fight(player, enemy, ref winCount);
                         break;
 
                     case 1:
-                        World.CheckStatus(player);
+                        World.CheckStatus(player, winCount);
                         break;
 
                     case 2:
@@ -38,6 +38,7 @@ namespace MiniAdventure.Interfaces
                         break;
 
                     case 3:
+                        Console.WriteLine();
                         Console.WriteLine("You try to avoid the fight and flee.");
                         Console.WriteLine("Press any key to continue");
                         Console.ReadKey(true);
@@ -51,7 +52,7 @@ namespace MiniAdventure.Interfaces
             }
 
         }
-        public static bool Fight(Player player, Enemy enemy)
+        public static bool Fight(Player player, Enemy enemy, ref int winCount)
         {
             Console.Clear();
             Console.WriteLine(enemy.Narrative);
@@ -64,6 +65,7 @@ namespace MiniAdventure.Interfaces
             if (!isEnemyAlive(enemy))
             {
                 GainGold(player, enemy);
+                winCount ++;
                 Console.WriteLine($"The {enemy.Name}'s Hp is 0. You got the food and {enemy.GoldReward} gold.");
                 Console.WriteLine("Press any key to continue");
                 Console.ReadKey(true);
@@ -133,5 +135,6 @@ namespace MiniAdventure.Interfaces
             Console.WriteLine($"Press any key to return.");
             Console.ReadKey(true);
         }
+
     }
 }

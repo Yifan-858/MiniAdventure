@@ -4,7 +4,7 @@ namespace MiniAdventure.Interfaces
 {
     public static class EnemeyData
     {
-        public static List<Enemy> GetEnemyArr()
+        public static List<Enemy> GetEnemyArr(int winCount)
         {
             //Generate an array of the enemies
             string[] enemyNames = { "Worm", "Dog", "Monkey", "Candles" };
@@ -24,7 +24,7 @@ namespace MiniAdventure.Interfaces
             List<Enemy> enemyArr = new List<Enemy> {};
             for(int i=0; i < enemyNames.Length; i++)
             {
-                Enemy enemy = new Enemy(enemyNames[i], hpValue[i], damageValue[i], goldRewardValue[i],enemyNarrtives[i],enemyImages[i]);
+                Enemy enemy = new Enemy(enemyNames[i], hpValue[i], damageValue[i] + winCount, goldRewardValue[i] + winCount,enemyNarrtives[i],enemyImages[i]);
                 enemyArr.Add(enemy);
             }
 

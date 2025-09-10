@@ -15,8 +15,8 @@ namespace MiniAdventure
              string[] worldNarrative = { "Welcome to this strange world. You are on a bizzard street when you open your eyes. Oddly, you are very hungry. You look around and decide to...","You ate up the food, but don't feel anything in you belly. You decide to..." };
              string[] worldOptions = { "Explore", "Rest", "Check Status", "Quit Game" };
 
-            //Enemey
-            List<Enemy> enemyArr = EnemeyData.GetEnemyArr();
+            //Count how many battle the player has won
+            int winCount = 0;
 
             //Create a random index for enemey array
             Random rdm = new Random();
@@ -49,7 +49,7 @@ namespace MiniAdventure
                 Console.WriteLine();
                 Console.WriteLine("Press any key to start the game.");
                 Console.ReadKey(true);
-
+   
                 Player player = null;
 
                 while(player == null)
@@ -61,6 +61,8 @@ namespace MiniAdventure
                     
                 while (isWorld) 
                 { 
+                    List<Enemy> enemyArr = EnemeyData.GetEnemyArr(winCount);
+
                     //Create the world menu
                     Menu worldMenu = new Menu(worldNarrative[0], worldOptions);
                     int indexSelected = worldMenu.ControlChoice();
@@ -75,24 +77,23 @@ namespace MiniAdventure
 
                     previousThirdIndex = previousSecondIndex;
                     previousSecondIndex = previousIndex;
-                    previousIndex = enemyIndex;
-                        
+                    previousIndex = enemyIndex;                    
 
-                    switch (worldOptions[indexSelected])
+                    switch (indexSelected)
                     {
-                        case "Explore":
-                            World.Explore(player, enemyArr[enemyIndex]);
+                        case 0:
+                            World.Explore(player, enemyArr[enemyIndex], ref winCount);
                             break;
 
-                        case "Rest":
+                        case 1:
                             player.HP = World.Rest(player);   
                             break;
                                 
-                        case "Check Status":
-                            World.CheckStatus(player);
+                        case 2:
+                            World.CheckStatus(player, winCount);
                             break;
 
-                        case "Quit Game":
+                        case 3:
                             inGame = World.QuitGame();
                             return;
 
