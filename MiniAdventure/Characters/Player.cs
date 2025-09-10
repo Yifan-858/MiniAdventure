@@ -6,7 +6,7 @@ namespace MiniAdventure.Characters
     {
         public string Name;
         public string HeroType;
-        public int HP ;
+        public int HP ; //MAXHP?
         public int Damage ;
         public int Gold = 0;
 

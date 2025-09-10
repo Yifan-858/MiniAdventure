@@ -36,6 +36,8 @@ namespace MiniAdventure.Interfaces
             }
         }
 
+        //Return the index of user's choice.
+        //If meet an enemy, take in enemy as parameter to re-render its text and image.
         public int ControlChoice(Enemy? enemy=null)
         {
             ConsoleKey keyPressed ;

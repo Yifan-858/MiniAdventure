@@ -24,7 +24,7 @@ namespace MiniAdventure.Interfaces
             Console.WriteLine($"| Gold      : {player.Gold,-19}|");
             Console.WriteLine("+================================+");
 
-            Console.WriteLine($"Press any key to return to menu.");
+            Console.WriteLine($"Press any key to return.");
             Console.ReadKey(true);
         }
 
@@ -51,28 +51,20 @@ namespace MiniAdventure.Interfaces
             Console.Clear();
             Console.WriteLine(enemy.Narrative);
             Console.WriteLine(enemy.Img);
-            string actionNarrative = "What do you want to do?";
-            string[] actionOptions = { "Take the food", "Check enemey status", "Check your status", "Walk away" };
+            string encounterNarrative = "What do you want to do?";
+            string[] encounterOptions = { "Take the food!", "Walk away..." };
 
-            Menu actionMenu = new Menu(actionNarrative, actionOptions);
-            int indexSelected = actionMenu.ControlChoice(enemy);
-            bool isPlayersTurn = true;
+            Menu encounterMenu = new Menu(encounterNarrative, encounterOptions);
+            int indexSelected = encounterMenu.ControlChoice(enemy);
+            
 
-            switch (actionOptions[indexSelected])
+            switch (encounterOptions[indexSelected])
             {
-                case "Take the food":
-                    Battle.Attack(player, enemy, isPlayersTurn);
+                case "Take the food!":
+                    Battle.EnterBattle(player, enemy);
                     break;
 
-                case "Check enemey status":
-                    Console.WriteLine("2");
-                    break;
-
-                case "Check your status":
-                    Console.WriteLine("3");
-                    break;
-
-                case "Walk away":
+                case "Walk away...":
                     Console.WriteLine("4");
                     break;
 
