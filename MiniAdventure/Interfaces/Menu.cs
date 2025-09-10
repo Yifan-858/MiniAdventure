@@ -53,6 +53,7 @@ namespace MiniAdventure.Interfaces
                 }
                 
                 Console.WriteLine(Narrative);
+                Console.WriteLine();
                 DisplayOptions();
 
                 keyPressed = Console.ReadKey(true).Key;

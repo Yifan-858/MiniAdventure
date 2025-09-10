@@ -6,29 +6,33 @@ namespace MiniAdventure.Characters
     {
         public string Name;
         public string HeroType;
-        public int HP ; //MAXHP?
+        public int HP ;
+        public int MaxHP;
         public int Damage ;
         public int Gold = 0;
 
-        public Player(string name, string heroType)
+        public Player(string name, string heroType, int selectedIndex)
         {
             Name = name;
             HeroType = heroType;
 
-            switch (HeroType)
+            switch (selectedIndex)
             {
-                case "Warrior":
+                case 0:
                     HP = 20;
+                    MaxHP = 20;
                     Damage = 5;
                     break;
 
-                case "Mage":
+                case 1:
                     HP = 15;
+                    MaxHP = 15;
                     Damage = 10;
                     break;
 
-                case "Rouge":
+                case 2:
                     HP = 18;
+                    MaxHP = 18;
                     Damage = 8;
                     break;
             }
@@ -38,7 +42,7 @@ namespace MiniAdventure.Characters
         {
             Console.Clear();
             string name = "";
-            //Get Name from user
+           
             while (string.IsNullOrEmpty(name))
             {
                 Console.WriteLine("Create your character"); 
@@ -57,8 +61,9 @@ namespace MiniAdventure.Characters
             int indexSelected = heroTypeMenu.ControlChoice();
 
             //Create the player
-            Player player = new Player(name, heroTypeOption[indexSelected]);   
-            
+            Player player = new Player(name, heroTypeOption[indexSelected], indexSelected);
+
+            Console.WriteLine();
             Console.WriteLine($"Cool, your name is {player.Name} and you are a {player.HeroType}");
             Console.WriteLine("Press any key to continue...");
             Console.ReadKey();

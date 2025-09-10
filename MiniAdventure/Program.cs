@@ -7,89 +7,101 @@ namespace MiniAdventure
     {
         static void Main(string[] args)
         {
+
             //Herotypes
-             string[] heroTypeOption = { "Warrior", "Mage", "Rogue" };
+             string[] heroTypeOption = { "Spoon Warrior", "Tomato Mage", "Cookie Rogue" };
 
             //World
              string[] worldNarrative = { "Welcome to this strange world. You are on a bizzard street when you open your eyes. Oddly, you are very hungry. You look around and decide to...","You ate up the food, but don't feel anything in you belly. You decide to..." };
              string[] worldOptions = { "Explore", "Rest", "Check Status", "Quit Game" };
 
-            //Generate an array of the enemies
-            string[] enemyNames = { "Apple", "Sausage", "Banana", "Cake" };
-            int[] hpValue = { 10, 12, 16, 20 };
-            int[] damageValue = { 3, 6, 10, 2 };
-            int[] goldRewardValue = { 2, 3, 5, 6 };
-            string[] enemyNarrtives = { "Oh, you see an delicious apple on the side. But someone is enjoy it. A worm sticks its head out of the apple. It does not like to share the apple with you.","oh, Dog","Oh, Monkey","Oh,Cake" };
-            string[] enemyImages = { "AppleImg", "dOgImg", "monkeyImg", "cakeImg" };
+            //Enemey
+            List<Enemy> enemyArr = EnemeyData.GetEnemyArr();
 
-            List<Enemy> enemyArr = new List<Enemy> {};
-            for(int i=0; i < enemyNames.Length; i++)
-            {
-                Enemy enemy = new Enemy(enemyNames[i], hpValue[i], damageValue[i], goldRewardValue[i],enemyNarrtives[i],enemyImages[i]);
-                enemyArr.Add(enemy);
-            }
-     
+            //Create a random index for enemey array
+            Random rdm = new Random();
+            int previousIndex = -1;
+            int previousSecondIndex = -1;
+            int previousThirdIndex = -1;
             
             //Start Game
             bool inGame = true;
 
             while (inGame)
             {   
-                Console.WriteLine("HungerGame");
-                Console.WriteLine("Press Enter to start the game");
+                Console.WriteLine(" ▄  █   ▄      ▄     ▄▀  ▄███▄   █▄▄▄▄       ▄▀  ██   █▀▄▀█ ▄███▄  \r\n█   █    █      █  ▄▀    █▀   ▀  █  ▄▀     ▄▀    █ █  █ █ █ █▀   ▀ \r\n██▀▀█ █   █ ██   █ █ ▀▄  ██▄▄    █▀▀▌      █ ▀▄  █▄▄█ █ ▄ █ ██▄▄   \r\n█   █ █   █ █ █  █ █   █ █▄   ▄▀ █  █      █   █ █  █ █   █ █▄   ▄▀\r\n   █  █▄ ▄█ █  █ █  ███  ▀███▀     █        ███     █    █  ▀███▀  \r\n  ▀    ▀▀▀  █   ██                ▀                █    ▀          \r\n                                                  ▀                ");
+                Console.WriteLine();
+                Thread.Sleep(800);
+                Console.WriteLine("No mercy, no snacks.");
+                Thread.Sleep(800);
+                Console.WriteLine("Every bite is earned.");
+                Thread.Sleep(800);
+                Console.WriteLine("Fight for your life... or starve!");
+                Thread.Sleep(800);
+                Console.Write("If you are ready");
+                Thread.Sleep(400);
+                Console.Write(".");
+                Thread.Sleep(400);
+                Console.Write(".");
+                Thread.Sleep(400);
+                Console.WriteLine(".");
+                Thread.Sleep(800);
+                Console.WriteLine();
+                Console.WriteLine("Press any key to start the game.");
+                Console.ReadKey(true);
 
-                ConsoleKey keyPressed = Console.ReadKey(true).Key;
+                Player player = null;
 
-                if (keyPressed == ConsoleKey.Enter)
+                while(player == null)
                 {
-                    Player player = null;
-
-                    while(player == null)
-                    {
-                        player = Player.CreatePlayer(heroTypeOption);
-                    }
-
-                    bool isWorld = true;
-                    
-                    while (isWorld) 
-                    { 
-                        //Create the world menu
-                        Menu worldMenu = new Menu(worldNarrative[0], worldOptions);
-                        int indexSelected = worldMenu.ControlChoice();
-                        Random rdm = new Random();
-                        int enemyIndex = rdm.Next(0, enemyArr.Count - 1);//not same number
-
-                        switch (worldOptions[indexSelected])
-                        {
-                            case "Explore":
-                                World.Explore(player, enemyArr[enemyIndex]);
-                                break;
-
-                            case "Rest":
-                                player.HP = World.Rest(player);   
-                                break;
-                                
-                            case "Check Status":
-                                World.CheckStatus(player);
-                                break;
-
-                            case "Quit Game":
-                                inGame = World.QuitGame();
-                                return;
-
-                            default:
-                                Console.WriteLine("Choose a valid option");
-                                break;
-                        }
-                    }
-
-
-
+                    player = Player.CreatePlayer(heroTypeOption);
                 }
-            }
-            
-            
 
+                bool isWorld = true;
+                    
+                while (isWorld) 
+                { 
+                    //Create the world menu
+                    Menu worldMenu = new Menu(worldNarrative[0], worldOptions);
+                    int indexSelected = worldMenu.ControlChoice();
+
+                    //Loop through the enemey array without repeating  
+                    int enemyIndex;
+                        
+                    do
+                    {
+                        enemyIndex = rdm.Next(0, enemyArr.Count);
+                    } while (enemyIndex == previousIndex || enemyIndex == previousSecondIndex || enemyIndex == previousThirdIndex);
+
+                    previousThirdIndex = previousSecondIndex;
+                    previousSecondIndex = previousIndex;
+                    previousIndex = enemyIndex;
+                        
+
+                    switch (worldOptions[indexSelected])
+                    {
+                        case "Explore":
+                            World.Explore(player, enemyArr[enemyIndex]);
+                            break;
+
+                        case "Rest":
+                            player.HP = World.Rest(player);   
+                            break;
+                                
+                        case "Check Status":
+                            World.CheckStatus(player);
+                            break;
+
+                        case "Quit Game":
+                            inGame = World.QuitGame();
+                            return;
+
+                        default:
+                            Console.WriteLine("Choose a valid option");
+                            break;
+                    }
+                }                
+            }
         }
     }
 }

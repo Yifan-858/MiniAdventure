@@ -19,7 +19,7 @@ namespace MiniAdventure.Interfaces
             Console.WriteLine("+--------------------------------+");
             Console.WriteLine($"| Name      : {player.Name,-19}|");
             Console.WriteLine($"| Hero Type : {player.HeroType,-19}|");
-            Console.WriteLine($"| HP        : {player.HP,-19}|");
+            Console.WriteLine($"| HP        : {player.HP}|{player.MaxHP,-16}|");
             Console.WriteLine($"| Damage    : {player.Damage,-19}|");
             Console.WriteLine($"| Gold      : {player.Gold,-19}|");
             Console.WriteLine("+================================+");
@@ -32,8 +32,18 @@ namespace MiniAdventure.Interfaces
         {
             Console.Clear();
             player.HP += 2;
-            Console.WriteLine($"You took a nap. Gain 2 HP.");
-            Console.WriteLine($"HP: {player.HP}");
+           
+            if(player.HP < player.MaxHP)
+            {
+                Console.WriteLine($"You took a nap. Gain 2 HP.");
+                Console.WriteLine($"HP: {player.HP}/{player.MaxHP}");
+            }
+            else
+            {
+                player.HP = player.MaxHP;
+                Console.WriteLine($"You have reached the MaxHP.");
+            }
+    
             Console.WriteLine($"Press any key to return");
             Console.ReadKey(true);
 
