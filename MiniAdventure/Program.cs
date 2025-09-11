@@ -54,14 +54,14 @@ namespace MiniAdventure
 
                 while(player == null)
                 {
-                    player = Player.CreatePlayer(heroTypeOption);
+                    player = PlayerManager.CreatePlayer(heroTypeOption);
                 }
 
                 bool isWorld = true;
                     
                 while (isWorld) 
                 { 
-                    List<Enemy> enemyArr = EnemeyData.GetEnemyArr(winCount);
+                    List<Enemy> enemyArr = EnemeyManager.GetEnemyArr(winCount);
 
                     //Create the world menu
                     Menu worldMenu = new Menu(worldNarrative[0], worldOptions);

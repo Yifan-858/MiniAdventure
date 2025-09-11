@@ -67,6 +67,9 @@ namespace MiniAdventure.Interfaces
                 GainGold(player, enemy);
                 winCount ++;
                 Console.WriteLine($"The {enemy.Name}'s Hp is 0. You got the food and {enemy.GoldReward} gold.");
+                Thread.Sleep(800);
+                Console.WriteLine($"You've won this round... But can you win them all? Be aware your enemies grow stronger next time you meet them!");
+                Thread.Sleep(800);
                 Console.WriteLine("Press any key to continue");
                 Console.ReadKey(true);
                 return false;

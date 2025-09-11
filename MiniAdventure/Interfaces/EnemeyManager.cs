@@ -2,14 +2,14 @@
 
 namespace MiniAdventure.Interfaces
 {
-    public static class EnemeyData
+    public static class EnemeyManager
     {
         public static List<Enemy> GetEnemyArr(int winCount)
         {
             //Generate an array of the enemies
             string[] enemyNames = { "Worm", "Dog", "Monkey", "Candles" };
             int[] hpValue = { 10, 12, 16, 20 };
-            int[] damageValue = { 3, 6, 10, 2 };
+            int[] damageValue = { 3, 4, 8, 1 };
             int[] goldRewardValue = { 2, 3, 5, 6 };
             string[] enemyNarrtives = { 
                 "You spot a shiny, delicious apple on the ground. But beaware! A tiny worm pokes its head out, glaring at you like you just insulted its entire family. It clearly does not want to share.",
