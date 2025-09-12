@@ -8,8 +8,7 @@ namespace MiniAdventure
         static void Main(string[] args)
         {
 
-            //Herotypes
-             string[] heroTypeOption = { "Spoon Warrior", "Tomato Mage", "Cookie Rogue" };
+            List<Enemy> enemyArr = EnemyManager.GetEnemyArr();
 
             //World
              string[] worldNarrative = { "Welcome to this strange world. You are on a bizzard street when you open your eyes. Oddly, you are very hungry. You look around and decide to...","You ate up the food, but don't feel anything in you belly. You decide to..." };
@@ -17,13 +16,7 @@ namespace MiniAdventure
 
             //Count how many battle the player has won
             int winCount = 0;
-
-            //Create a random index for enemey array
-            Random rdm = new Random();
-            int previousIndex = -1;
-            int previousSecondIndex = -1;
-            int previousThirdIndex = -1;
-            
+            int enemyIndex = 0;
             //Start Game
             bool inGame = true;
 
@@ -54,47 +47,34 @@ namespace MiniAdventure
 
                 while(player == null)
                 {
-                    player = PlayerManager.CreatePlayer(heroTypeOption);
+                    player = PlayerManager.CreatePlayer();
                 }
 
                 bool isWorld = true;
                     
                 while (isWorld) 
                 { 
-                    List<Enemy> enemyArr = EnemeyManager.GetEnemyArr(winCount);
-
                     //Create the world menu
                     Menu worldMenu = new Menu(worldNarrative[0], worldOptions);
                     int indexSelected = worldMenu.ControlChoice();
 
-                    //Loop through the enemey array without repeating  
-                    int enemyIndex;
-                        
-                    do
-                    {
-                        enemyIndex = rdm.Next(0, enemyArr.Count);
-                    } while (enemyIndex == previousIndex || enemyIndex == previousSecondIndex || enemyIndex == previousThirdIndex);
-
-                    previousThirdIndex = previousSecondIndex;
-                    previousSecondIndex = previousIndex;
-                    previousIndex = enemyIndex;                    
-
                     switch (indexSelected)
                     {
                         case 0:
-                            World.Explore(player, enemyArr[enemyIndex], ref winCount);
+                            enemyIndex = EnemyManager.PickRandomEnemy(enemyArr);
+                            WorldManager.Explore(player, enemyArr[enemyIndex], ref winCount, enemyArr);
                             break;
 
                         case 1:
-                            player.HP = World.Rest(player);   
+                            player.HP = WorldManager.Rest(player);   
                             break;
                                 
                         case 2:
-                            World.CheckStatus(player, winCount);
+                            WorldManager.CheckStatus(player, winCount);
                             break;
 
                         case 3:
-                            inGame = World.QuitGame();
+                            inGame = WorldManager.QuitGame();
                             return;
 
                         default:

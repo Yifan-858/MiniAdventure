@@ -3,7 +3,7 @@ using MiniAdventure.Interfaces;
 
 namespace MiniAdventure.Interfaces
 {
-   public static class World
+   public static class WorldManager
     {
         public static bool QuitGame()
         {
@@ -51,7 +51,7 @@ namespace MiniAdventure.Interfaces
             return player.HP;
         }
 
-        public static void Explore(Player player, Enemy enemy, ref int winCount)
+        public static void Explore(Player player, Enemy enemy, ref int winCount, List<Enemy> enemyArr)
         {
             if (enemy == null)
             {
@@ -72,11 +72,11 @@ namespace MiniAdventure.Interfaces
             switch (indexSelected)
             {
                 case 0:
-                    Battle.EnterBattle(player, enemy, ref winCount);
+                    Battle.EnterBattle(player, enemy, ref winCount,enemyArr);
                     break;
 
                 case 1:
-                    Console.WriteLine("4");
+                    Console.WriteLine();
                     break;
 
                 default:

@@ -1,12 +1,11 @@
 ﻿
 using MiniAdventure.Characters;
-using System;
 
 namespace MiniAdventure.Interfaces
 {
     public static class Battle
     {
-        public static void EnterBattle(Player player, Enemy enemy, ref int winCount)
+        public static void EnterBattle(Player player, Enemy enemy, ref int winCount, List<Enemy> enemyArr)
         {
             Console.Clear();
             Console.WriteLine(enemy.Narrative);
@@ -26,11 +25,11 @@ namespace MiniAdventure.Interfaces
                 switch (indexSelected)
                 {
                     case 0:
-                        isInBattle= Fight(player, enemy, ref winCount);
+                        isInBattle= Fight(player, enemy, ref winCount, enemyArr);
                         break;
 
                     case 1:
-                        World.CheckStatus(player, winCount);
+                        WorldManager.CheckStatus(player, winCount);
                         break;
 
                     case 2:
@@ -52,7 +51,7 @@ namespace MiniAdventure.Interfaces
             }
 
         }
-        public static bool Fight(Player player, Enemy enemy, ref int winCount)
+        public static bool Fight(Player player, Enemy enemy, ref int winCount, List<Enemy> enemyArr)
         {
             Console.Clear();
             Console.WriteLine(enemy.Narrative);
@@ -64,12 +63,19 @@ namespace MiniAdventure.Interfaces
 
             if (!isEnemyAlive(enemy))
             {
-                GainGold(player, enemy);
                 winCount ++;
-                Console.WriteLine($"The {enemy.Name}'s Hp is 0. You got the food and {enemy.GoldReward} gold.");
+                EnemyManager.IncreaseEnemyDamage(enemyArr);
+                int lootGoldAmount = LootAfterWin(player, enemy);
+
+                Console.WriteLine($"The {enemy.Name}'s Hp is 0.");
+                Thread.Sleep(800);
+                Console.WriteLine($"You got the food and looted {lootGoldAmount} gold from the {enemy.Name}.");
                 Thread.Sleep(800);
                 Console.WriteLine($"You've won this round... But can you win them all? Be aware your enemies grow stronger next time you meet them!");
                 Thread.Sleep(800);
+
+                EnemyManager.RestoreEnemyHP(enemyArr);
+
                 Console.WriteLine("Press any key to continue");
                 Console.ReadKey(true);
                 return false;
@@ -118,11 +124,6 @@ namespace MiniAdventure.Interfaces
 
         }
 
-        public static void GainGold(Player player, Enemy enemy)
-        {
-            player.Gold += enemy.GoldReward;
-        }
-
         public static void CheckEnemyStatus(Enemy enemy)
         {
             Console.Clear();
@@ -137,6 +138,15 @@ namespace MiniAdventure.Interfaces
 
             Console.WriteLine($"Press any key to return.");
             Console.ReadKey(true);
+        }
+
+        //Extra feature: When the player wins, loot gold within the range of enemy's goldRward
+        public static int LootAfterWin(Player player, Enemy enemy)
+        {
+            Random rdm = new Random();
+            int lootGoldAmount = rdm.Next(1, enemy.GoldReward + 1);
+            player.Gold += lootGoldAmount;
+            return lootGoldAmount;
         }
 
     }

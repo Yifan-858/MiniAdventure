@@ -43,7 +43,8 @@ namespace MiniAdventure.Interfaces
             ConsoleKey keyPressed ;
 
             do
-            { 
+            
+                { 
                 Console.Clear();
 
                 if (enemy != null)

@@ -2,9 +2,10 @@
 
 namespace MiniAdventure.Interfaces
 {
-    public class PlayerManager
+    public static class PlayerManager
     {
-        public static Player CreatePlayer(string[] heroTypeOption)
+        public static readonly string[] heroTypeOption = { "Spoon Warrior", "Tomato Mage", "Cookie Rogue" };
+        public static Player CreatePlayer()
         {
             Console.Clear();
             string name = "";
