@@ -7,16 +7,14 @@ namespace MiniAdventure
     {
         static void Main(string[] args)
         {
-
+            //Get enemies
             List<Enemy> enemyArr = EnemyManager.GetEnemyArr();
+            int enemyIndex = 0;
 
             //World
              string[] worldNarrative = { "Welcome to this strange world. You are on a bizzard street when you open your eyes. Oddly, you are very hungry. You look around and decide to...","You ate up the food, but don't feel anything in you belly. You decide to..." };
              string[] worldOptions = { "Explore", "Rest", "Check Status", "Quit Game" };
 
-            //Count how many battle the player has won
-            int winCount = 0;
-            int enemyIndex = 0;
             //Start Game
             bool inGame = true;
 
@@ -62,7 +60,7 @@ namespace MiniAdventure
                     {
                         case 0:
                             enemyIndex = EnemyManager.PickRandomEnemy(enemyArr);
-                            WorldManager.Explore(player, enemyArr[enemyIndex], ref winCount, enemyArr);
+                            WorldManager.Explore(player, enemyArr[enemyIndex], enemyArr);
                             break;
 
                         case 1:
@@ -70,7 +68,7 @@ namespace MiniAdventure
                             break;
                                 
                         case 2:
-                            WorldManager.CheckStatus(player, winCount);
+                            WorldManager.CheckStatus(player);
                             break;
 
                         case 3:

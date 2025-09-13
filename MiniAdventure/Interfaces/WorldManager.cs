@@ -1,17 +1,17 @@
 ﻿using MiniAdventure.Characters;
-using MiniAdventure.Interfaces;
 
 namespace MiniAdventure.Interfaces
 {
    public static class WorldManager
     {
+        
         public static bool QuitGame()
         {
             Console.WriteLine("See you soon.");
             return false;
         }
 
-        public static void CheckStatus(Player player, int winCount)
+        public static void CheckStatus(Player player)
         {
             Console.Clear();
             Console.WriteLine("+================================+");
@@ -22,7 +22,7 @@ namespace MiniAdventure.Interfaces
             Console.WriteLine($"| HP        : {player.HP}|{player.MaxHP,-16}|");
             Console.WriteLine($"| Damage    : {player.Damage,-19}|");
             Console.WriteLine($"| Gold      : {player.Gold,-19}|");
-            Console.WriteLine($"| Kills     : {winCount,-19}|");
+            Console.WriteLine($"| Kills     : {PlayerManager.WinCount,-19}|");
             Console.WriteLine("+================================+");
 
             Console.WriteLine($"Press any key to return.");
@@ -32,26 +32,38 @@ namespace MiniAdventure.Interfaces
         public static int Rest(Player player)
         {
             Console.Clear();
-            player.HP += 2;
-           
-            if(player.HP < player.MaxHP)
+
+            GameManager.UpdateDisableRest();
+
+            if (GameManager.disableRest)
             {
-                Console.WriteLine($"You took a nap. Gain 2 HP.");
-                Console.WriteLine($"HP: {player.HP}/{player.MaxHP}");
+                Console.WriteLine("            _   _\r\n           (.)_(.)\r\n        _ (   _   ) _\r\n       / \\/`-----'\\/ \\\r\n     __\\ ( (     ) ) /__\r\n     )   /\\ \\._./ /\\   (\r\n      )_/ /|\\   /|\\ \\_(");
+                Console.WriteLine();
+                Console.WriteLine("A tiny frog stares at you with unblinking judgment. Somehow, you lose the will to rest here.");
             }
             else
             {
-                player.HP = player.MaxHP;
-                Console.WriteLine($"You have reached the MaxHP.");
+                player.HP += 2;
+                
+                if(player.HP < player.MaxHP)
+                {
+                    Console.WriteLine($"You took a nap. Gain 2 HP.");
+                    Console.WriteLine($"HP: {player.HP}/{player.MaxHP}");
+                }
+                else
+                {
+                    player.HP = player.MaxHP;
+                    Console.WriteLine($"You have reached the MaxHP.");
+                }
             }
-    
+                
             Console.WriteLine($"Press any key to return");
             Console.ReadKey(true);
 
             return player.HP;
         }
 
-        public static void Explore(Player player, Enemy enemy, ref int winCount, List<Enemy> enemyArr)
+        public static void Explore(Player player, Enemy enemy, List<Enemy> enemyArr)
         {
             if (enemy == null)
             {
@@ -72,7 +84,7 @@ namespace MiniAdventure.Interfaces
             switch (indexSelected)
             {
                 case 0:
-                    Battle.EnterBattle(player, enemy, ref winCount,enemyArr);
+                    Battle.EnterBattle(player, enemy,enemyArr);
                     break;
 
                 case 1:

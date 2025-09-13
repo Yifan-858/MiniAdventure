@@ -5,7 +5,7 @@ namespace MiniAdventure.Interfaces
 {
     public static class Battle
     {
-        public static void EnterBattle(Player player, Enemy enemy, ref int winCount, List<Enemy> enemyArr)
+        public static void EnterBattle(Player player, Enemy enemy, List<Enemy> enemyArr)
         {
             Console.Clear();
             Console.WriteLine(enemy.Narrative);
@@ -25,11 +25,11 @@ namespace MiniAdventure.Interfaces
                 switch (indexSelected)
                 {
                     case 0:
-                        isInBattle= Fight(player, enemy, ref winCount, enemyArr);
+                        isInBattle= Fight(player, enemy,enemyArr);
                         break;
 
                     case 1:
-                        WorldManager.CheckStatus(player, winCount);
+                        WorldManager.CheckStatus(player);
                         break;
 
                     case 2:
@@ -51,7 +51,7 @@ namespace MiniAdventure.Interfaces
             }
 
         }
-        public static bool Fight(Player player, Enemy enemy, ref int winCount, List<Enemy> enemyArr)
+        public static bool Fight(Player player, Enemy enemy, List<Enemy> enemyArr)
         {
             Console.Clear();
             Console.WriteLine(enemy.Narrative);
@@ -61,9 +61,9 @@ namespace MiniAdventure.Interfaces
             enemy.HP -= player.Damage;
             Console.WriteLine($"You attacked the {enemy.Name}. Caused {player.Damage} damage.");
 
-            if (!isEnemyAlive(enemy))
+            if (!IsEnemyAlive(enemy))
             {
-                winCount ++;
+                PlayerManager.WinCount ++;
                 EnemyManager.IncreaseEnemyDamage(enemyArr);
                 int lootGoldAmount = LootAfterWin(player, enemy);
 
@@ -88,7 +88,7 @@ namespace MiniAdventure.Interfaces
             player.HP -= enemy.Damage;
             Console.WriteLine($"You took {enemy.Damage} damage!");
 
-            if (!isPlayerAlive(player))
+            if (!IsPlayerAlive(player))
             {
                 Console.WriteLine("Your Hp is 0.");
                 Thread.Sleep(1000);
@@ -103,7 +103,7 @@ namespace MiniAdventure.Interfaces
             return true;
                     
         }
-        public static bool isPlayerAlive(Player player )
+        public static bool IsPlayerAlive(Player player )
         {
             if(player.HP <= 0)
             {
@@ -113,7 +113,7 @@ namespace MiniAdventure.Interfaces
             return true;
         }
 
-        public static bool isEnemyAlive(Enemy enemy)
+        public static bool IsEnemyAlive(Enemy enemy)
         {
              if(enemy.HP <= 0)
              {
@@ -140,7 +140,7 @@ namespace MiniAdventure.Interfaces
             Console.ReadKey(true);
         }
 
-        //Extra feature: When the player wins, loot gold within the range of enemy's goldRward
+        //Extra feature: When the player wins, loot some gold within the range of enemy's goldRward
         public static int LootAfterWin(Player player, Enemy enemy)
         {
             Random rdm = new Random();

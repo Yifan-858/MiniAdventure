@@ -32,6 +32,19 @@ namespace MiniAdventure.Interfaces
                 {
                     pointer = " ";
                 }
+            
+                //Gray out the Rest option when DisableRest is true
+                GameManager.UpdateDisableRest();
+
+                if( optionSelected == "Rest" && GameManager.disableRest)
+                {
+                    Console.ForegroundColor = ConsoleColor.DarkGray;
+                }
+                else
+                {
+                    Console.ResetColor();
+                }
+
                 Console.WriteLine($"{pointer} {Options[i]}");
             }
         }
