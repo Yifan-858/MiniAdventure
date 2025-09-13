@@ -1,5 +1,6 @@
 ﻿using MiniAdventure.Characters;
 using MiniAdventure.Interfaces;
+using System.Media;
 
 namespace MiniAdventure
 {
@@ -17,6 +18,9 @@ namespace MiniAdventure
 
             //Start Game
             bool inGame = true;
+
+            SoundPlayer soundPlayer = new SoundPlayer("Spookwave.wav");
+            soundPlayer.PlayLooping();
 
             while (inGame)
             {   
