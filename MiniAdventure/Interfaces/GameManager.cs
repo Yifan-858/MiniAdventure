@@ -4,7 +4,7 @@ namespace MiniAdventure.Interfaces
 {
     public static class GameManager
     {
-        //Extra Feature: Disable Rest every second round
+        //Extra Feature: Disable Rest every second fight round
         public static bool disableRest = false;
         public static bool UpdateDisableRest()
         {
