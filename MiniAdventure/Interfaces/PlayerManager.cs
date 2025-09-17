@@ -5,7 +5,7 @@ namespace MiniAdventure.Interfaces
     public static class PlayerManager
     {
         public static readonly string[] HeroTypeOption = { "Spoon Warrior", "Tomato Mage", "Cookie Rogue" };
-        public static readonly int WinCount = 0;
+        public static int WinCount = 0;
         public static Player CreatePlayer()
         {
             Console.Clear();
@@ -59,7 +59,7 @@ namespace MiniAdventure.Interfaces
             }
 
             //Create the player
-            Player player = new Player(name, HeroTypeOption[indexSelected], hp, maxHp, damage, gold);
+            Player player = new Player(name, hp, damage, HeroTypeOption[indexSelected], maxHp, gold);
 
             Console.WriteLine();
             Console.WriteLine($"Cool, your name is {player.Name} and you are a {player.HeroType}");

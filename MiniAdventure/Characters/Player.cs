@@ -1,23 +1,16 @@
-﻿using MiniAdventure.Interfaces;
-
-namespace MiniAdventure.Characters
+﻿namespace MiniAdventure.Characters
 {
-    public class Player
+    public class Player : Character
     {
-        public string Name;
         public string HeroType;
-        public int HP ;
         public int MaxHP;
-        public int Damage ;
         public int Gold = 0;
 
-        public Player(string name, string heroType, int hp, int maxHp, int damage, int gold)
+        public Player(string name, int hp, int damage, string heroType, int maxHp, int gold)
+            : base(name, hp, damage)
         {
-            Name = name;
             HeroType = heroType;
-            HP = hp;
-            MaxHP = maxHp;
-            Damage = damage;
+            MaxHP = maxHp; 
             Gold = gold;
         }
     }

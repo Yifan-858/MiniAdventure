@@ -1,21 +1,16 @@
 ﻿
-namespace MiniAdventure.Characters
+namespace MiniAdventure.Characters 
 {
-    public class Enemy
+    public class Enemy : Character
     {
-        public string Name;
-        public int HP;
-        public int Damage;
         public int GoldReward;
         public string Narrative;
         public string Img;
         
 
         public Enemy(string name, int hp, int damage, int goldReward, string narrative, string img)
+            : base(name, hp, damage)
         {
-            Name = name;
-            HP = hp;
-            Damage = damage;
             GoldReward = goldReward;
             Narrative = narrative;
             Img = img;
