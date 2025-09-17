@@ -4,8 +4,8 @@ namespace MiniAdventure.Interfaces
 {
     public static class PlayerManager
     {
-        public static string[] HeroTypeOption = { "Spoon Warrior", "Tomato Mage", "Cookie Rogue" };
-        public static int WinCount = 0;
+        public static readonly string[] HeroTypeOption = { "Spoon Warrior", "Tomato Mage", "Cookie Rogue" };
+        public static readonly int WinCount = 0;
         public static Player CreatePlayer()
         {
             Console.Clear();
