@@ -1,5 +1,5 @@
 ﻿using MiniAdventure.Characters;
-using MiniAdventure.Interfaces;
+using MiniAdventure.Managers;
 using System.Media;
 
 namespace MiniAdventure
@@ -68,7 +68,7 @@ namespace MiniAdventure
                             break;
 
                         case 1:
-                            player.HP = WorldManager.Rest(player);   
+                            WorldManager.Rest(player);   
                             break;
                                 
                         case 2:
