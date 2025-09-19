@@ -59,11 +59,14 @@ namespace MiniAdventure.Interfaces
 
             //Player's turn
             enemy.HP -= player.Damage;
-            Console.WriteLine($"You attacked the {enemy.Name}. Caused {player.Damage} damage.");
+            Console.WriteLine($"You attacked the {enemy.Name}");
+            Thread.Sleep(800);
+            Console.WriteLine($"The {enemy.Name} took {player.Damage} damage.");
+            Thread.Sleep(800);
 
             if (!IsEnemyAlive(enemy))
             {
-                PlayerManager.WinCount ++;
+                GameManager.WinCount ++;
                 EnemyManager.IncreaseEnemyDamage(enemyArr);
                 int lootGoldAmount = LootAfterWin(player, enemy);
 
@@ -86,7 +89,9 @@ namespace MiniAdventure.Interfaces
             Console.ReadKey(true);
             Console.WriteLine($"The {enemy.Name} attacked you.");
             player.HP -= enemy.Damage;
-            Console.WriteLine($"You took {enemy.Damage} damage!");
+            Thread.Sleep(800);
+            Console.WriteLine($"You got {enemy.Damage} damage!");
+            Thread.Sleep(800);
 
             if (!IsPlayerAlive(player))
             {

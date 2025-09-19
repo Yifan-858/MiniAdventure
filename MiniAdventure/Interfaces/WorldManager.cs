@@ -22,7 +22,7 @@ namespace MiniAdventure.Interfaces
             Console.WriteLine($"| HP        : {player.HP}|{player.MaxHP,-16}|");
             Console.WriteLine($"| Damage    : {player.Damage,-19}|");
             Console.WriteLine($"| Gold      : {player.Gold,-19}|");
-            Console.WriteLine($"| Kills     : {PlayerManager.WinCount,-19}|");
+            Console.WriteLine($"| Kills     : {GameManager.WinCount,-19}|");
             Console.WriteLine("+================================+");
 
             Console.WriteLine($"Press any key to return.");

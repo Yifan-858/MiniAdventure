@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MiniAdventure.Characters
 {
-    public class Character
+    public abstract class Character
     {
         public string Name;
         public int HP;
