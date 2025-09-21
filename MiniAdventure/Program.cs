@@ -25,7 +25,7 @@ namespace MiniAdventure
             };
 
             //Play Music
-            SoundPlayer soundPlayer = new SoundPlayer("Spookwave.wav");
+            SoundPlayer soundPlayer = new SoundPlayer("Asset/Spookwave.wav");
             soundPlayer.PlayLooping();
 
             //Start Game

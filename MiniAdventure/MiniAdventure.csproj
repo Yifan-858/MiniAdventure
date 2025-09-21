@@ -8,6 +8,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Asset\Spookwave.wav" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Asset\Spookwave.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="NAudio" Version="2.2.1" />
     <PackageReference Include="System.Windows.Extensions" Version="9.0.9" />
   </ItemGroup>
