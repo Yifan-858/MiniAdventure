@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MiniAdventure.Managers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,7 +10,9 @@ namespace MiniAdventure.Items
     public class ColorItem : BaseItem
     {
         private int nextId = 1;
-        public ColorItem(string name, string description) : base(name, description)
+        public static ConsoleColor[] NewColor = {ConsoleColor.DarkMagenta, ConsoleColor.Blue, ConsoleColor.Cyan, ConsoleColor.Green, ConsoleColor.Yellow, ConsoleColor.DarkYellow, ConsoleColor.Red};
+
+        public ColorItem(string name, string description, int cost) : base(name, description, cost)
         {
         }
 
@@ -17,7 +20,10 @@ namespace MiniAdventure.Items
         {
             return nextId++;
         }
-
-
+        public override void UseItem()
+        {
+            base.UseItem();
+            WorldManager.SetColor(NewColor);
+        }
     }
 }

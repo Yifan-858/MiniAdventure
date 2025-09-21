@@ -16,7 +16,7 @@ namespace MiniAdventure.Managers
             while (isInBattle) 
             { 
                 string battleNarrative = "You action:";
-                string[] battleOptions = { "Fight", "Check your status", "Check enemy status","Oh no, I didn't mean to loss!" };
+                List<string> battleOptions = new List<string>{ "Fight", "Check your status", "Check enemy status","Oh no, I didn't mean to loss!" };
 
                 Menu battleMenu = new Menu(battleNarrative, battleOptions);
                 int indexSelected = battleMenu.ControlChoice(enemy);

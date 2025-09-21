@@ -4,7 +4,7 @@ namespace MiniAdventure.Managers
 {
     public static class PlayerManager
     {
-        public static readonly string[] HeroTypeOption = { "Spoon Warrior", "Tomato Mage", "Cookie Rogue" };
+        public static readonly List<string> HeroTypeOption = new List<string>{ "Spoon Warrior", "Tomato Mage", "Cookie Rogue" };
         public static Player CreatePlayer()
         {
             Console.Clear();

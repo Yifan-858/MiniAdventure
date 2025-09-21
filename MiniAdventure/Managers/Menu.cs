@@ -7,10 +7,10 @@ namespace MiniAdventure.Managers
     class Menu
     {
         public string Narrative;
-        public string[] Options;
+        public List<string> Options;
         public int IndexSelected;
 
-        public Menu(string narrative,string[] options)
+        public Menu(string narrative,List<string> options)
         {
             Narrative = narrative;
             Options = options;
@@ -19,7 +19,7 @@ namespace MiniAdventure.Managers
 
         private void DisplayOptions()
         {
-            for(int i=0; i<Options.Length; i++)
+            for(int i=0; i<Options.Count; i++)
             {
                 string optionSelected = Options[i];
                 string pointer;
@@ -79,14 +79,14 @@ namespace MiniAdventure.Managers
                     //Loop the number to prevent the index go out of range.
                     if(IndexSelected == -1)
                     {
-                        IndexSelected = Options.Length - 1;
+                        IndexSelected = Options.Count - 1;
                     }
                 }
                 else if(keyPressed == ConsoleKey.DownArrow)
                 {
                     IndexSelected ++;
 
-                    if(IndexSelected == Options.Length)
+                    if(IndexSelected == Options.Count)
                     {
                         IndexSelected = 0;
                     }

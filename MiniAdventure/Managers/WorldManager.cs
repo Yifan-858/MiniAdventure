@@ -1,5 +1,6 @@
 ﻿using MiniAdventure.Characters;
 using MiniAdventure.Items;
+using System.Numerics;
 
 
 namespace MiniAdventure.Managers
@@ -12,37 +13,43 @@ namespace MiniAdventure.Managers
             ConsoleColor.White
         };
 
-        public static void ChangeConsoleColor(ConsoleColor[] newColor)
+        public static void SetColor(ConsoleColor[] ColorTheme)
         {
-            for(int i = 0; i < 8; i++)
-            {
-                TextColor[i] = newColor[i];
-            }
+            for(int i = 0; i < TextColor.Length; i++)
+                    {
+                        TextColor[i] = ColorTheme[i];
+                    }
         }
-        public static void CheckStatus(Player player, ColorItem )
+        
+        public static void CheckStatus(Player player)
         {
-            if (ColorItem.IsUsed)
-            {
-                ChangeConsoleColor();
-            }
+            
             Console.Clear();
-            Console.ForegroundColor = TextColor[1];
+            Console.ForegroundColor = TextColor[0];
             Console.WriteLine("+================================+");
             Console.WriteLine("|          PLAYER STATUS         |");
             Console.WriteLine("+--------------------------------+");
-            Console.ForegroundColor = TextColor[2];
+            Console.ForegroundColor = TextColor[1];
             Console.WriteLine($"| Name      : {player.Name,-19}|");
-            Console.ForegroundColor = TextColor[3];
+            Console.ForegroundColor = TextColor[2];
             Console.WriteLine($"| Hero Type : {player.HeroType,-19}|");
+            Console.ForegroundColor = TextColor[3];
+            if(player.HP.ToString().Length > 1)
+            {
+                Console.WriteLine($"| HP        : {player.HP}|{player.MaxHP,-16}|");
+            }
+            else
+            {
+                Console.WriteLine($"| HP        : {player.HP}|{player.MaxHP,-17}|");
+            }
+                
             Console.ForegroundColor = TextColor[4];
-            Console.WriteLine($"| HP        : {player.HP}|{player.MaxHP,-16}|");
-            Console.ForegroundColor = TextColor[5];
             Console.WriteLine($"| Damage    : {player.Damage,-19}|");
-            Console.ForegroundColor = TextColor[6];
+            Console.ForegroundColor = TextColor[5];
             Console.WriteLine($"| Gold      : {player.Gold,-19}|");
-            Console.ForegroundColor = TextColor[7];
+            Console.ForegroundColor = TextColor[6];
             Console.WriteLine($"| Kills     : {GameManager.WinCount,-19}|");
-             Console.ForegroundColor = TextColor[1];
+             Console.ForegroundColor = TextColor[0];
             Console.WriteLine("+================================+");
 
             Console.WriteLine($"Press any key to return.");
@@ -82,7 +89,7 @@ namespace MiniAdventure.Managers
             Console.WriteLine(enemy.Narrative);
             Console.WriteLine(enemy.Img);
             string encounterNarrative = "What do you want to do?";
-            string[] encounterOptions = { "Take the food!", "Walk away..." };
+            List<string> encounterOptions = new List<string> { "Take the food!", "Walk away..." };
 
             Menu encounterMenu = new Menu(encounterNarrative, encounterOptions);
             int indexSelected = encounterMenu.ControlChoice(enemy);

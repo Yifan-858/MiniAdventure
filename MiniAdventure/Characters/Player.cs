@@ -38,17 +38,9 @@ namespace MiniAdventure.Characters
             Gold += reward;
         }
 
-        public bool SpendGold(int cost)
-        {
-            if( Gold < cost)
-            {
-                Console.WriteLine("You don't have enough gold for it.");
-                return false;
-            }
-            
+        public void SpendGold(int cost)
+        { 
             Gold -= cost;
-            return true;
-            
         }
       
     }

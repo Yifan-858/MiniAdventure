@@ -1,4 +1,5 @@
 ﻿using MiniAdventure.Characters;
+using MiniAdventure.Items;
 using MiniAdventure.Managers;
 using System.Media;
 
@@ -14,13 +15,21 @@ namespace MiniAdventure
 
             //World
              string[] worldNarrative = { "Welcome to this strange world. You are on a bizzard street when you open your eyes. Oddly, you are very hungry. You look around and decide to...","You ate up the food, but don't feel anything in you belly. You decide to..." };
-             string[] worldOptions = { "Explore", "Rest", "Check Status", "Quit Game" };
+            List<string> worldOptions = new List<string> { "Explore", "Rest", "Check Status", "Shop", "Quit Game" };
+
+            //Items
+            ColorItem paintBallGun = new ColorItem("Paint Ball Gun", "Shot yourself and make your status colorful", 4);
+            List<BaseItem> shopInventory = new List<BaseItem>
+            {
+                paintBallGun
+            };
+
+            //Play Music
+            SoundPlayer soundPlayer = new SoundPlayer("Spookwave.wav");
+            soundPlayer.PlayLooping();
 
             //Start Game
             bool inGame = true;
-
-            SoundPlayer soundPlayer = new SoundPlayer("Spookwave.wav");
-            soundPlayer.PlayLooping();
 
             while (inGame)
             {   
@@ -45,12 +54,7 @@ namespace MiniAdventure
                 Console.WriteLine("Press any key to start the game.");
                 Console.ReadKey(true);
    
-                Player player = null;
-
-                while(player == null)
-                {
-                    player = PlayerManager.CreatePlayer();
-                }
+                Player player = PlayerManager.CreatePlayer();
 
                 bool isWorld = true;
                     
@@ -76,6 +80,11 @@ namespace MiniAdventure
                             break;
 
                         case 3:
+                            //Fun feature to try out polymorphism
+                            GameManager.InitializeShop(player, shopInventory);
+                            break;
+
+                        case 4:
                             inGame = WorldManager.QuitGame();
                             return;
 
