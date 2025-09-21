@@ -65,7 +65,7 @@ namespace MiniAdventure.Managers
 
             if (enemy.HP == 0)
             {
-                GameManager.WinCount ++;
+                WorldManager.IncreaseWin();
                 EnemyManager.IncreaseEnemyDamage(enemyArr);
                 int lootGoldAmount = LootAfterWin(player, enemy);
 

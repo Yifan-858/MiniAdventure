@@ -12,7 +12,7 @@ namespace MiniAdventure.Items
         private int nextId = 1;
         public static ConsoleColor[] NewColor = {ConsoleColor.DarkMagenta, ConsoleColor.Blue, ConsoleColor.Cyan, ConsoleColor.Green, ConsoleColor.Yellow, ConsoleColor.DarkYellow, ConsoleColor.Red};
 
-        public ColorItem(string name, string description, int cost) : base(name, description, cost)
+        public ColorItem(string name, string itemType, string description, int cost) : base(name, itemType, description, cost)
         {
         }
 

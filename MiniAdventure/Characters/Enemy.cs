@@ -1,10 +1,9 @@
-﻿using MiniAdventure.Interface;
-using System.Numerics;
+﻿using System.Numerics;
 using System;
 
 namespace MiniAdventure.Characters 
 {
-    public class Enemy : Character, IVisual
+    public class Enemy : Character
     {
         public int GoldReward;
         public string Narrative { get; set; }
@@ -21,11 +20,6 @@ namespace MiniAdventure.Characters
         public void restoreTotalHP(int hp)
         {
             HP = hp;
-        }
-
-        internal void restoreHP(int v)
-        {
-            throw new NotImplementedException();
         }
     }
 }

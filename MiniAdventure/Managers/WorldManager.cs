@@ -7,18 +7,44 @@ namespace MiniAdventure.Managers
 {
    public static class WorldManager
     {
-        public static ConsoleColor[] TextColor { get; private set; } =
+        private static ConsoleColor[] TextColor =
         {
-            ConsoleColor.White, ConsoleColor.White, ConsoleColor.White, ConsoleColor.White, ConsoleColor.White, ConsoleColor.White, 
-            ConsoleColor.White
+            ConsoleColor.Gray, ConsoleColor.Gray, ConsoleColor.Gray, ConsoleColor.Gray, ConsoleColor.Gray, ConsoleColor.Gray, 
+            ConsoleColor.Gray
         };
 
         public static void SetColor(ConsoleColor[] ColorTheme)
         {
             for(int i = 0; i < TextColor.Length; i++)
-                    {
-                        TextColor[i] = ColorTheme[i];
-                    }
+                {
+                    TextColor[i] = ColorTheme[i];
+                }
+        }
+
+        //Extra Feature: Disable Rest every second fight round or Use item to unlock Rest
+        public static int WinCount { get; private set; } = 0;
+        public static bool isRestDisabled { get; private set; } = false;
+        private static bool isRestAlwaysAvailable = false;
+        public static void DisableRestByWin()
+        {
+            if (!isRestAlwaysAvailable)
+            {
+                isRestDisabled = WinCount % 2 == 0;
+            }
+            else
+            {
+                isRestDisabled = false;
+            }
+        }
+
+        public static void MakeRestAlwaysAvailable(RestItem restItem)
+        {
+            isRestAlwaysAvailable = restItem.IsUsed;
+        }
+
+        public static void IncreaseWin()
+        {
+            WinCount++;
         }
         
         public static void CheckStatus(Player player)
@@ -48,10 +74,11 @@ namespace MiniAdventure.Managers
             Console.ForegroundColor = TextColor[5];
             Console.WriteLine($"| Gold      : {player.Gold,-19}|");
             Console.ForegroundColor = TextColor[6];
-            Console.WriteLine($"| Kills     : {GameManager.WinCount,-19}|");
-             Console.ForegroundColor = TextColor[0];
+            Console.WriteLine($"| Kills     : {WinCount,-19}|");
+            Console.ForegroundColor = TextColor[0];
             Console.WriteLine("+================================+");
 
+            Console.ForegroundColor = ConsoleColor.Gray;
             Console.WriteLine($"Press any key to return.");
             Console.ReadKey(true);
         }
@@ -60,9 +87,9 @@ namespace MiniAdventure.Managers
         {
             Console.Clear();
 
-            GameManager.UpdateDisableRest();
+            DisableRestByWin();
 
-            if (GameManager.disableRest)
+            if (isRestDisabled)
             {
                 Console.WriteLine("            _   _\r\n           (.)_(.)\r\n        _ (   _   ) _\r\n       / \\/`-----'\\/ \\\r\n     __\\ ( (     ) ) /__\r\n     )   /\\ \\._./ /\\   (\r\n      )_/ /|\\   /|\\ \\_(");
                 Console.WriteLine();
@@ -70,6 +97,7 @@ namespace MiniAdventure.Managers
             }
             else
             {
+                Console.WriteLine("There is no frog around. You feel relaxed.");
                 player.GainHP(2);
             }
                 

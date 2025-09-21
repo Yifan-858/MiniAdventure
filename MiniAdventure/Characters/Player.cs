@@ -19,7 +19,6 @@ namespace MiniAdventure.Characters
 
         public void GainHP(int amount)
         {
-            int previousHP = HP;
             HP = Math.Min(HP + amount, MaxHP);
 
             if(HP < MaxHP)
@@ -29,7 +28,7 @@ namespace MiniAdventure.Characters
             }
             else
             {
-                Console.WriteLine($"You have reached the MaxHP.");
+                Console.WriteLine("You have rested fully and reached the MaxHP.");
             }            
         }
 

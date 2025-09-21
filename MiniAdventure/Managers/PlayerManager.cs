@@ -31,7 +31,7 @@ namespace MiniAdventure.Managers
             int indexSelected = heroTypeMenu.ControlChoice();
 
             //Prepare the player data
-            int hp = 0; // ?
+            int hp = 0; 
             int damage = 0;
             int maxHp = 0;
             int gold = 0;
@@ -39,8 +39,8 @@ namespace MiniAdventure.Managers
             switch (indexSelected)
             {
                 case 0:
-                    hp = 20;
-                    maxHp = 20;
+                    hp = 25;
+                    maxHp = 25;
                     damage = 5;
                     break;
 

@@ -18,10 +18,10 @@ namespace MiniAdventure
             List<string> worldOptions = new List<string> { "Explore", "Rest", "Check Status", "Shop", "Quit Game" };
 
             //Items
-            ColorItem paintBallGun = new ColorItem("Paint Ball Gun", "Shot yourself and make your status colorful", 4);
             List<BaseItem> shopInventory = new List<BaseItem>
             {
-                paintBallGun
+                new ColorItem("Paint Ball Gun", "ColorItem","Shot yourself and make your status colorful", 4),
+                new RestItem("Frog Eye Drop", "RestItem", "A tiny drop for the frog’s judgmental eyes",15)
             };
 
             //Play Music
@@ -81,7 +81,7 @@ namespace MiniAdventure
 
                         case 3:
                             //Fun feature to try out polymorphism
-                            GameManager.InitializeShop(player, shopInventory);
+                            ShopManager.InitializeShop(player, shopInventory);
                             break;
 
                         case 4:
