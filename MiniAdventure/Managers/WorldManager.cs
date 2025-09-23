@@ -7,6 +7,30 @@ namespace MiniAdventure.Managers
 {
    public static class WorldManager
     {
+        public static void GameIntro()
+        {
+            Console.WriteLine(" ▄  █   ▄      ▄     ▄▀  ▄███▄   █▄▄▄▄       ▄▀  ██   █▀▄▀█ ▄███▄  \r\n█   █    █      █  ▄▀    █▀   ▀  █  ▄▀     ▄▀    █ █  █ █ █ █▀   ▀ \r\n██▀▀█ █   █ ██   █ █ ▀▄  ██▄▄    █▀▀▌      █ ▀▄  █▄▄█ █ ▄ █ ██▄▄   \r\n█   █ █   █ █ █  █ █   █ █▄   ▄▀ █  █      █   █ █  █ █   █ █▄   ▄▀\r\n   █  █▄ ▄█ █  █ █  ███  ▀███▀     █        ███     █    █  ▀███▀  \r\n  ▀    ▀▀▀  █   ██                ▀                █    ▀          \r\n                                                  ▀                ");
+                Console.WriteLine();
+                Thread.Sleep(800);
+                Console.WriteLine("No mercy, no snacks.");
+                Thread.Sleep(800);
+                Console.WriteLine("Every bite is earned.");
+                Thread.Sleep(800);
+                Console.WriteLine("Fight for your life... or starve!");
+                Thread.Sleep(800);
+                Console.Write("If you are ready");
+                Thread.Sleep(400);
+                Console.Write(".");
+                Thread.Sleep(400);
+                Console.Write(".");
+                Thread.Sleep(400);
+                Console.WriteLine(".");
+                Thread.Sleep(800);
+                Console.WriteLine();
+                Console.WriteLine("Press any key to start the game.");
+                Console.ReadKey(true);
+        }
+
         private static ConsoleColor[] TextColor =
         {
             ConsoleColor.Gray, ConsoleColor.Gray, ConsoleColor.Gray, ConsoleColor.Gray, ConsoleColor.Gray, ConsoleColor.Gray, 
